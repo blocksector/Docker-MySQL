@@ -1,0 +1,17 @@
+version: '3.1'
+name: databases
+services:
+  mysql:
+    platform: linux/x86_64
+    container_name: ${CONTAINER_NAME}
+    image: mysql:${MYSQL_IMAGE}
+    restart: unless-stopped
+    ports:
+      - 3306:3306
+      - 33060:33060
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    volumes:
+      - ./.data:/var/lib/mysql
+    extra_hosts:
+      - host.docker.internal:host-gateway
